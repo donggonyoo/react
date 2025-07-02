@@ -22,7 +22,7 @@ function App() {
   );
 
   function enter(e){  /*enter키를 누르면 handleClick함수가실행 */
-    if( e.keyCode === 13){ 
+    if( e.keyCode == 13){ 
       handleClick();
     }
   }
