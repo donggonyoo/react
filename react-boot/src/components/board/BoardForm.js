@@ -4,12 +4,16 @@ import {useState} from "react";
 
 export default function BoardForm(){
 const navigate = useNavigate("");
-const[gname,setGname] = useState("");
+
+const[gname,setGname] = useState(""); /*폼에 사용될 변수들 */
 const[pass,setPass] = useState("");
 const[subject,setSubject] = useState("");
 const[content,setContent] = useState("");
 const[file2,setFile2] = useState("");
-const {boardid} = useParams();
+
+const {boardid} = useParams(); //파라미터값
+console.log(boardid)
+
 
 const handleSubmit = (e)=>{
     e.preventDefault();
@@ -21,7 +25,9 @@ const handleSubmit = (e)=>{
         form.append("subject",subject);
         form.append("content",content);
         form.append("boardid",boardid);
-        form.append("file2",fileinput.files[0]);
+        if(file2){
+            form.append("file2",fileinput.files[0]);
+        }
         fetch("http://localhost:8080/board/boardPro",{
             method:"POST",
             body:form
@@ -64,7 +70,7 @@ return (
                     ></textarea>
                 </div>
                 <div className="form-group">
-                    <label for="file">파일:</label>
+                    <label for="file2">파일:</label>
                     <input type="file" className="form-control" id="file2" onChange={(e)=>{setFile2(e.target.value);}} value={file2} name="file2"/>
                 </div>
                 <button type="submit" className="btn btn-primary">SUBMIT</button>

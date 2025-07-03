@@ -12,6 +12,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/board/boardList/:boardid" element={<BoardList/>}/>  {/*:boardid : 입력값*/}
+        <Route path="/board/boardList/:boardid&pageNum=:pageNum" element={<BoardList/>}/>  {/*:boardid : 입력값*/}
         <Route path="/board/boardForm/:boardid" element={<BoardForm/>}/>
       </Routes>
       </BrowserRouter>
