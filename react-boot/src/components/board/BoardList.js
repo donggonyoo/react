@@ -99,7 +99,12 @@ const BoardList=()=>{
                                     </td>
                                     <td>{dayjs(b.regdate).format("YYYY-MM-DD")}</td>
                                     <td>{b.readcnt}</td>
-                                    <td><img src={"http://localhost:8080/img/board/"+b.file1} width="30px" alt="file"/>{b.file1}</td>
+                                    {b.file1 ?(
+                                        <td><img src={"http://localhost:8080/img/board/"+b.file1} width="30px" alt="file"/>{b.file1}</td>
+                                    ):(
+                                        <td></td>
+                                    )}
+                                    
                                 </tr>
                             ))) : ( //거짓인경우(글이없는경우)
                                 <tr>

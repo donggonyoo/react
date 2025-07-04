@@ -2,6 +2,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import {useState} from "react";
 
+
 export default function BoardForm(){
 const navigate = useNavigate("");
 
@@ -15,7 +16,7 @@ const {boardid} = useParams(); //파라미터값
 console.log(boardid)
 
 
-const handleSubmit = (e)=>{
+const handleSubmit = async (e)=>{
     e.preventDefault();
     let fileinput = document.querySelector("#file2");
     try{
@@ -28,11 +29,17 @@ const handleSubmit = (e)=>{
         if(file2){
             form.append("file2",fileinput.files[0]);
         }
-        fetch("http://localhost:8080/board/boardPro",{
+        const response = await fetch("http://localhost:8080/board/boardPro",{
             method:"POST",
             body:form
         })
-        navigate(`/board/boardList/${boardid}`)
+        if (!response.ok) {
+      throw new Error(`서버 응답 실패: ${response.status}`);
+        }
+        console.log("등록성공")
+        navigate("/board/boardList/"+boardid)
+        
+        
     }
     catch(e){
         console.log(e)
@@ -69,8 +76,8 @@ return (
                     }} 
                     ></textarea>
                 </div>
-                <div className="form-group">
-                    <label for="file2">파일:</label>
+                <div className="form-group">                    
+                    <label for="file2">파일:</label>                                          
                     <input type="file" className="form-control" id="file2" onChange={(e)=>{setFile2(e.target.value);}} value={file2} name="file2"/>
                 </div>
                 <button type="submit" className="btn btn-primary">SUBMIT</button>
