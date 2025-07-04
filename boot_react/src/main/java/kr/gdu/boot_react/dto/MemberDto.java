@@ -1,0 +1,18 @@
+package kr.gdu.boot_react.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class MemberDto {
+    private String id;
+    private String pass;
+    private String name;
+    private int gender;
+    private String tel;
+    private String email;
+    private String picture;
+}
